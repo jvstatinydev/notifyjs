@@ -52,13 +52,13 @@
 	};
 	var hAligns = ["l", "c", "r"];
 	var vAligns = ["t", "m", "b"];
-	var mainPositions = ["t", "b", "l", "r"];
+	var mainPositions = ["t", "m", "b", "l", "c", "r"];
 	var opposites = {
 		t: "b",
-		m: null,
+		m: "m",
 		b: "t",
 		l: "r",
-		c: null,
+		c: "c",
 		r: "l"
 	};
 
@@ -349,14 +349,19 @@
 		if (!anchor || !document.body.contains(anchor[0])) {
 			anchor = globalAnchors[key] = createElem("div");
 			var css = {};
-			css[main] = 0;
-			if (align === "middle") {
-				css.top = '45%';
-			} else if (align === "center") {
-				css.left = '45%';
+			if (main === "middle") {
+				css.top = '50%';
+                		css.transform = 'translateY(-50%)';
+			} else {
+                		css[main] = 0;
+			}
+			if (align === "center") {
+				css.left = '50%';
+				css.transform = 'translateX(-50%)';
 			} else {
 				css[align] = 0;
 			}
+            
 			anchor.css(css).addClass(pluginClassName + "-corner");
 			$("body").append(anchor);
 		}
